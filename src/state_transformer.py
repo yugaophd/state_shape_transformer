@@ -20,7 +20,7 @@ original_bounds = original_state.total_bounds
 minx_orig, miny_orig, maxx_orig, maxy_orig = original_bounds   
 
 # %%
-# plot the original state
+# shifting
 
 # Step 1: Convert to UTM (Zone 18N)
 utm_crs = "EPSG:32618"  # UTM Zone 18N
