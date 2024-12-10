@@ -7,8 +7,12 @@ from shapely.affinity import translate
 
 #######Change the path to the directory where the source code is stored #######
 import os
-os.chdir('/Users/yugao/Desktop/projects/state_shape_transformer/src')
+# os.chdir('/Users/yugao/Desktop/projects/state_shape_transformer/src')
+# get user home directory
+home = os.path.expanduser("~")
+os.chdir(home+'/Python/state_shape_transformer/src')
 
+# %%
 # Load the shapefile and filter for {state_name} State
 shapefile_path = "../data/external/tl_2024_us_state/tl_2024_us_state.shp"
 states = gpd.read_file(shapefile_path)
@@ -26,6 +30,16 @@ minx_orig, miny_orig, maxx_orig, maxy_orig = original_bounds
 utm_crs = "EPSG:32618"  # UTM Zone 18N
 original_state_utm = original_state.to_crs(utm_crs)
 
+# %% 
+# plot in m east and north
+fig, ax = plt.subplots()
+original_state_utm.plot(ax=ax)
+plt.xlabel('Easting (m)')
+plt.ylabel('Northing (m)')
+plt.title(f"{state_name} State in UTM")
+plt.show()
+
+# %%
 # Step 2: Translate the shape to a new latitude
 # Latitude difference in meters: 1 degree latitude ≈ 111,000 meters
 original_lat = 42.5  # Approximate center latitude of NY State
